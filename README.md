@@ -94,3 +94,7 @@ To run all tests from `allTests.spec.ts`:
 
 Create a `.env` file:
 
+```
+BASE_URL=https://bolt.playrealbrokerage.com/login
+USERID=sahilagent
+PASSWORD=P@ssw0rd
