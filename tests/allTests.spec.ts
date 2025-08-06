@@ -27,23 +27,31 @@ test.describe('End-to-End Amount Adjustment Tests', () => {
 
   test('Mix amount and percentage', async () => {
     await amountTest.mixAmountAndPercentage('400', '400');
-
     // const result = await amountTest.getCalculatedMix();
     // expect(result).toBe('ExpectedValue');
   });
 
   test('Total amount calculation', async () => {
     await amountTest.makeTotalAmount('400', '400', '400', '400');
-
     // const total = await amountTest.getTotalAmountDisplayed();
     // expect(total).toBe('1600');
   });
 
   test('Total percentage calculation', async () => {
     await amountTest.makeTotalPercentage('25', '25', '25', '25');
-
     // const percent = await amountTest.getPercentageDisplayed();
     // expect(percent).toBe('100');
   });
-});
 
+  //  Clean-up after each test
+  test.afterEach(async ({ page }, testInfo) => {
+    if (testInfo.status !== testInfo.expectedStatus) {
+      console.log(`Test failed: ${testInfo.title}`);
+      await page.screenshot({ path: `screenshots/${testInfo.title.replace(/\s+/g, '_')}.png`, fullPage: true });
+    } else {
+      console.log(`Test passed: ${testInfo.title}`);
+    }
+
+    await page.close(); // Cleanup browser page
+  });
+});
