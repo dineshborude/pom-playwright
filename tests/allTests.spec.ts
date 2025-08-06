@@ -13,28 +13,37 @@ if (!url || !username || !password) {
   throw new Error("Missing environment variables: BASE_URL, USERID, or PASSWORD");
 }
 
-test.describe('End-to-End Amount Tests', () => {
+test.describe('End-to-End Amount Adjustment Tests', () => {
+  let amountTest: AmountTest;
+
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
+    amountTest = new AmountTest(page);
+
     await loginPage.visitPage(url);
     await loginPage.loginFunction(username, password);
+    await amountTest.navigateToCommisionAdjusting();
   });
 
-  test('Mix: Amount + Percentage', async ({ page }) => {
-    const amountTest = new AmountTest(page);
-    await page.waitForTimeout(5000); 
+  test('Mix amount and percentage', async () => {
     await amountTest.mixAmountAndPercentage('400', '400');
+
+    // const result = await amountTest.getCalculatedMix();
+    // expect(result).toBe('ExpectedValue');
   });
 
-  test('Total Amount', async ({ page }) => {
-    const amountTest = new AmountTest(page);
-    await page.waitForTimeout(5000);
+  test('Total amount calculation', async () => {
     await amountTest.makeTotalAmount('400', '400', '400', '400');
+
+    // const total = await amountTest.getTotalAmountDisplayed();
+    // expect(total).toBe('1600');
   });
 
-  test('Total Percentage', async ({ page }) => {
-    const amountTest = new AmountTest(page);
-    await page.waitForTimeout(5000);
+  test('Total percentage calculation', async () => {
     await amountTest.makeTotalPercentage('25', '25', '25', '25');
+
+    // const percent = await amountTest.getPercentageDisplayed();
+    // expect(percent).toBe('100');
   });
 });
+

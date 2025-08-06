@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import { LoginPage } from '../pages/login';
 import { AmountTest } from '../pages/amountTest';
 
-// dotenv.config();
 
 test('Total Amounts', async ({ page }) => {
   const login = new LoginPage(page);

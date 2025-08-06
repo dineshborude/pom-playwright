@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 import dotenv from 'dotenv';
 import { LoginPage } from '../pages/login';
 
-dotenv.config();
+// dotenv.config();
 
 test('Login Test using .env values', async ({ page }) => {
   const login = new LoginPage(page);
