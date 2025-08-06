@@ -4,16 +4,16 @@ exports.LoginPage = class LoginPage {
 
         this.page = page;
         
-        this.emailField = page.locator('#user-name');
-        this.pwdField = page.locator('#password');
-        this.loginButton = page.locator('#login-button')
+        this.emailField = page.getByTestId('usernameOrEmail');
+        this.pwdField = page.getByTestId('password');
+        this.loginButton = page.getByRole('button', { name: 'Login' })
 
 
     }
 
     async visitPage(url) {
 
-        await this.page.goto(url);
+        await this.page.goto(url,{timeout : 60000});
 
     }
 
@@ -22,6 +22,7 @@ exports.LoginPage = class LoginPage {
         await this.emailField.fill(username);
         await this.pwdField.fill(pwd);
         await this.loginButton.click();
+        console.log('Login Done')
 
     }
 
